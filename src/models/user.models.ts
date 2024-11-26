@@ -4,8 +4,6 @@ import { supabase } from "../config/supabase";
 async function getAllUser() {
   const { data, error } = await supabase.from('pp_users').select(`*, pp_comments(*)`);
 
-  console.log(data);
-
   if (error) {
     console.error(`Erreur lors de la récupération des utilisateurs :`, error.message);
     return {
