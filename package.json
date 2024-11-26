@@ -2,20 +2,23 @@
   "name": "peekpic_backend_2",
   "version": "1.0.0",
   "main": "server.ts",
-"scripts": {
-  "build": "tsc",
-  "dev": "ts-node ./src/server.ts",
-  "start": "node dist/server.js"
-},
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node ./src/server.ts",
+    "start": "node dist/server.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@supabase/supabase-js": "^2.46.1",
     "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
     "express": "^4.21.1"
   },
   "devDependencies": {
+    "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.0",
     "@types/node": "^22.9.4",
     "nodemon": "^3.1.7",
