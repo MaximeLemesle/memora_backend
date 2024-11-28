@@ -4,6 +4,8 @@ import { getAllAlbum, getAlbum, postAlbum } from "../models/album.models.ts";
 
 const router: Router = express.Router();
 
+// --- GET --- //
+
 router.get("/", async (req: Request, res: Response) => {
   const { data, error } = await getAllAlbum();
   if (error) {
@@ -20,12 +22,20 @@ router.get("/:id([0-9]+)", async (req: Request, res: Response) => {
   res.status(200).json(data);
 });
 
+// --- POST --- //
+type Album = {
+  title: Text;
+  album_description: Text;
+};
+
 router.post("/", async (req: Request, res: Response) => {
-  const { data: albums, error } = await postAlbum(req.body);
+  const album: Album = req.body;
+
+  const { data, error } = await postAlbum(album);
   if (error) {
     res.status(500).json(error);
   }
-  res.status(200).json(albums);
+  res.status(200).json(data);
 });
 
 export default router;

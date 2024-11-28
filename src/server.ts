@@ -26,12 +26,6 @@ app.get("/api", (req: Request, res: Response): void => {
 import user from './routes/user.routes.ts';
 app.use('/api/user', user);
 
-
-// const album = {
-//   title: 'Voyage Pologne',
-//   album_description: 'Voyage en Pologne en 2021',
-// };
-
 // Routes album
 import album from './routes/album.routes.ts';
 app.use('/api/album', album);
@@ -46,6 +40,7 @@ app.use('/api/comment', comment);
 
 // Routes photo
 import photo from './routes/photo.routes.ts';
+import bodyParser from 'body-parser';
 app.use('/api/photo', photo);
 
 // Start server
