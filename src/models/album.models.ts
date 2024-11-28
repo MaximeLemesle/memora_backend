@@ -3,14 +3,15 @@ import { supabase } from "../config/supabase";
 
 // --- GET --- //
 async function getAllAlbum() {
-const { data, error } = await supabase.from('pp_albums').select('*, pp_pages(*)');
+  const { data, error } = await supabase
+    .from("pp_albums")
+    .select("*, pp_pages(*)");
 
-if (error) {
+  if (error) {
     console.error(`Erreur lors de la récupération des albums :`, error.message);
     return {
       data: null,
-      error:
-        `Une erreur s'est produite lors de la récupération des albums`,
+      error: `Une erreur s'est produite lors de la récupération des albums`,
     };
   }
 
@@ -19,16 +20,18 @@ if (error) {
 
 async function getAlbum(id: number) {
   const { data, error } = await supabase
-    .from('pp_albums')
-    .select('*, pp_pages(*)')
+    .from("pp_albums")
+    .select("*, pp_pages(*)")
     .eq("id_album", id);
 
   if (error) {
-    console.error(`Erreur lors de la récupération de l'album avec l'id ${id} :`, error.message);
+    console.error(
+      `Erreur lors de la récupération de l'album avec l'id ${id} :`,
+      error.message
+    );
     return {
       data: null,
-      error:
-        `Une erreur s'est produite lors de la récupération de l'album avec l'id ${id}`,
+      error: `Une erreur s'est produite lors de la récupération de l'album avec l'id ${id}`,
     };
   }
 
@@ -39,19 +42,21 @@ export { getAllAlbum, getAlbum };
 
 // --- POST --- //
 type Album = {
-  title: Text,
-  album_description: Text,
-}
+  title: Text;
+  album_description: Text;
+};
 
 async function postAlbum(album: Album) {
-  const { data, error } = await supabase.from('pp_albums').insert([album]).select();
+  const { data, error } = await supabase
+    .from("pp_albums")
+    .insert([album])
+    .select();
 
   if (error) {
     console.error(`Erreur lors de la création de l'album :`, error.message);
     return {
       data: null,
-      error:
-        `Une erreur s'est produite lors de la création de l'album`,
+      error: `Une erreur s'est produite lors de la création de l'album`,
     };
   }
 
@@ -60,8 +65,6 @@ async function postAlbum(album: Album) {
 
 export { postAlbum };
 
-
 // --- PUT --- //
-
 
 // --- DELETE --- //

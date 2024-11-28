@@ -1,10 +1,10 @@
 import express, { Application, Request, Response } from 'express';
 import dotenv from 'dotenv';
 
-dotenv.config();
 
 // Init server
 const app: Application = express();
+dotenv.config();
 const PORT = process.env.PORT || 8888;
 
 // Middleware
@@ -35,8 +35,6 @@ app.use('/api/user', user);
 // Routes album
 import album from './routes/album.routes.ts';
 app.use('/api/album', album);
-
-// const express = require('express')const app = express()const parkings = require('./parkings.json')// Middlewareapp.use(express.json())app.get('/parkings', (req,res) => {    res.status(200).json(parkings)})app.get('/parkings/:id', (req,res) => {    const id = parseInt(req.params.id)    const parking = parkings.find(parking => parking.id === id)    res.status(200).json(parking)})app.post('/parkings', (req,res) => {    parkings.push(req.body)    res.status(200).json(parkings)})app.listen(8080, () => {    console.log("Serveur à l'écoute")})
 
 // Routes page
 import page from './routes/page.routes.ts';
