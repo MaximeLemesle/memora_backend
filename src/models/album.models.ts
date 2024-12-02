@@ -1,6 +1,16 @@
 // Init supabase
 import { supabase } from "../config/supabase";
 
+// --- TYPE --- //
+type Album = {
+  id_album: number;
+  title: Text;
+  album_description: Text;
+  owner: number;
+  created_date: Date;
+  privacy: boolean;
+};
+
 // --- GET --- //
 async function getAllAlbum() {
   const { data, error } = await supabase
@@ -41,10 +51,6 @@ async function getAlbum(id: number) {
 export { getAllAlbum, getAlbum };
 
 // --- POST --- //
-type Album = {
-  title: Text;
-  album_description: Text;
-};
 
 async function postAlbum(album: Album) {
   const { data, error } = await supabase
@@ -65,6 +71,25 @@ async function postAlbum(album: Album) {
 
 export { postAlbum };
 
-// --- PUT --- //
+// --- UPDATE --- //
+
+async function updateAlbum(album: Album) {
+  const { data, error } = await supabase
+    .from("pp_albums")
+    .update(album)
+    .eq("id_album", album.id_album);
+
+  if (error) {
+    console.error(`Erreur lors de la mise à jour de l'album n°${album.id_album} :`, error.message);
+    return {
+      data: null,
+      error: `Une erreur s'est produite lors de la mise à jour de l'album  n°${album.id_album}`,
+    };
+  }
+
+  return { data, error };
+}
+
+export { updateAlbum };
 
 // --- DELETE --- //
