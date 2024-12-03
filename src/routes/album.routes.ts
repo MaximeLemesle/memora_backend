@@ -1,18 +1,9 @@
 import express from "express";
 import type { Request, Response, Router } from "express";
-import { getAllAlbum, getAlbum, postAlbum, updateAlbum } from "../models/album.models.ts";
+import { getAllAlbum, getAlbum, postAlbum, updateAlbum, deleteAlbum } from "../models/album.models.ts";
+import { Album } from "../types/index";
 
 const router: Router = express.Router();
-
-// --- TYPE --- //
-type Album = {
-  id_album: number;
-  title: Text;
-  album_description: Text;
-  owner: number;
-  created_date: Date;
-  privacy: boolean;
-};
 
 // --- GET --- //
 
@@ -50,6 +41,18 @@ router.put("/", async (req: Request, res: Response) => {
   const album: Album = req.body;
 
   const { data, error } = await updateAlbum(album);
+  if (error) {
+    res.status(500).json(error);
+  }
+  res.status(200).json(data);
+});
+
+// --- DELETE --- //
+
+router.delete("/", async (req: Request, res: Response) => {
+  const album: Album = req.body;
+
+  const { data, error } = await deleteAlbum(album);
   if (error) {
     res.status(500).json(error);
   }
