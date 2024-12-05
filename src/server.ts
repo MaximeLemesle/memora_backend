@@ -40,7 +40,6 @@ app.use('/api/comment', comment);
 
 // Routes photo
 import photo from './routes/photo.routes.ts';
-import bodyParser from 'body-parser';
 app.use('/api/photo', photo);
 
 // Start server
