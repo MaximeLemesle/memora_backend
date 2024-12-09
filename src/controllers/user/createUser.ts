@@ -2,16 +2,8 @@ import { supabase } from "../../config/supabase";
 
 export async function createUserController(req: any, res: any) {
   try {
-    const {
-      id_user,
-      firstname,
-      lastname,
-      mail,
-      password,
-      address,
-      profile_picture,
-      created_date_account,
-    } = req.body;
+    const { firstname, lastname, mail, password, address, profile_picture } =
+      req.body;
 
     // Check if user is complete
     if (!firstname)
@@ -29,25 +21,30 @@ export async function createUserController(req: any, res: any) {
       .from("pp_users")
       .select("*")
       .eq("mail", mail.toLowerCase());
-
-    if (existingUser)
-      return res.status(400).json({ message: "User already exists", user: existingUser });
-    // TODO: CHeck error existingUser return true and block the user creation
-
+    if (error) {
+      return res
+        .status(500)
+        .json({
+          message: "An error occurred during user verification.",
+          error: error.toString(),
+        });
+    } else if (existingUser === null) {
+      return res
+        .status(400)
+        .json({ message: "User already exists.", user: existingUser });
+    }
 
     // Post user in the database
     const data = await supabase
       .from("pp_users")
       .insert([
         {
-          id_user,
           firstname,
           lastname,
           mail,
           password,
           address: address.toLowerCase(),
           profile_picture,
-          created_date_account,
         },
       ])
       .select();
