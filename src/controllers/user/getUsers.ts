@@ -5,12 +5,12 @@ export async function getUsersController(req: any, res: any) {
     const { error, data } = await supabase.from("pp_users").select("*");
 
     if (error) {
-      console.error(
-        `Erreur lors de la récupération des utilisateurs : ${error.message}`
-      );
+      return res.status(500).json({ message: "An error has occurred while retrieving users.", error: error.toString(), });
+    } else if (data.length === 0) {
+      res.status(400).json({ message: `No users found`, user: data });
     }
 
-    res.status(200).json({ users: data });
+    return res.status(200).json({ message: `Users retrieved`, user: data });
   } catch (error: any) {
     res.status(500).json({ error: error.toString() });
   }

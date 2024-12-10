@@ -4,23 +4,25 @@ import { getAlbum, postAlbum, updateAlbum, deleteAlbum } from "../models/album.m
 import { Album } from "../types/index";
 import { getAlbumsController } from "../controllers/album/getAlbums.ts";
 import { getAlbumByIdController } from "../controllers/album/getAlbumById.ts";
+import { createAlbumController } from "../controllers/album/createAlbum.ts";
 
 const router: Router = express.Router();
 
 router.get("/", getAlbumsController);
 router.get("/:id([0-9]+)", getAlbumByIdController);
+router.post("/", createAlbumController);
 
 // --- POST --- //
 
-router.post("/", async (req: Request, res: Response) => {
-  const album: Album = req.body;
+// router.post("/", async (req: Request, res: Response) => {
+//   const album: Album = req.body;
 
-  const { data, error } = await postAlbum(album);
-  if (error) {
-    res.status(500).json(error);
-  }
-  res.status(200).json(data);
-});
+//   const { data, error } = await postAlbum(album);
+//   if (error) {
+//     res.status(500).json(error);
+//   }
+//   res.status(200).json(data);
+// });
 
 // --- UPDATE --- //
 

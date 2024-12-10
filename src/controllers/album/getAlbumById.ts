@@ -13,11 +13,13 @@ export async function getAlbumByIdController(req: any, res: any) {
       .select("*")
       .eq("id_album", id);
 
-    if (error || data.length === 0) {
+    if (error) {
       res.status(404).json({
         message: `Album id ${id} not found`,
-        error: error ? error.toString() : null,
+        error: error.toString(),
       });
+    } else if (data.length === 0) {
+      res.status(400).json({ message: `Album id ${id} not found`, album: data });
     }
 
     return res.status(200).json({ message: `Album retrieved`, album: data });
