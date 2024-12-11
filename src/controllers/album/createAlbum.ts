@@ -15,7 +15,6 @@ export async function createAlbumController(req: any, res: any) {
     //   .select("*")
     //   .eq("title", title);
 
-    // console.log("existingAlbum " + existingAlbum);
     // if (existingAlbumError) {
     //   return res.status(500).json({ message: "An error occurred during album verification.", error: existingAlbumError.toString(),});
     // } else if (existingAlbum) {

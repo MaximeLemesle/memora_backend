@@ -2,7 +2,7 @@ import { supabase } from "../../config/supabase";
 
 export async function getUsersController(req: any, res: any) {
   try {
-    const { error, data } = await supabase.from("pp_users").select("*");
+    const { error, data } = await supabase.from("pp_users").select("*").order("id_user", { ascending: true });
 
     if (error) {
       return res.status(500).json({ message: "An error has occurred while retrieving users.", error: error.toString(), });

@@ -2,7 +2,7 @@ import { supabase } from "../../config/supabase";
 
 export async function getAlbumsController(req: any, res: any) {
   try {
-    const { error, data } = await supabase.from("pp_albums").select("*");
+    const { error, data } = await supabase.from("pp_albums").select("*").order("id_album", { ascending: true });
 
     if (error) {
       return res.status(500).json({ message: "An error has occurred while retrieving albums.", error: error.toString(), });
