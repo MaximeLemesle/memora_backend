@@ -10,7 +10,7 @@ const router = express.Router();
 router.get("/", getUsersController);
 router.get("/:id([0-9]+)", getUserByIdController);
 router.post("/", createUserController);
-router.put("/", updateUserController);
+router.put("/:id([0-9]+)", updateUserController);
 router.delete("/:id([0-9]+)", deleteUserController);
 
 export default router;

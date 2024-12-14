@@ -2,8 +2,8 @@ import { supabase } from "../../config/supabase";
 
 export async function updateUserController(req: any, res: any) {
   try {
+    const { id: id_user } = req.params;
     const {
-      id_user,
       firstname,
       lastname,
       mail,
